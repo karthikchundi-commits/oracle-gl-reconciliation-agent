@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=70", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "oracle-gl-reconciliation-agent"
+version = "0.1.0"
+description = "Agentic AI system for Oracle Fusion Cloud GL journal imbalance detection and correction"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic>=0.40.0",
+    "openai>=1.55.0",
+    "requests>=2.32.0",
+    "python-dotenv>=1.0.0",
+    "pandas>=2.2.0",
+    "openpyxl>=3.1.0",
+    "jinja2>=3.1.0",
+    "rich>=13.9.0",
+    "pydantic>=2.9.0",
+    "pydantic-settings>=2.6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-mock>=3.14.0",
+]
+
+[project.scripts]
+gl-recon = "examples.run_reconciliation:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*", "config*", "examples*"]
